@@ -1,9 +1,9 @@
 # Stage 1: Build React app
 FROM node:22-alpine AS builder
 WORKDIR /app
-COPY client/package*.json ./
+COPY ./package*.json ./
 RUN npm install
-COPY client/ .
+COPY . .
 RUN npm run build
 
 # Stage 2: Serve with NGINX
