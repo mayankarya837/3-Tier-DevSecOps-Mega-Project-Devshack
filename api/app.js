@@ -13,6 +13,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Serve React static files
+const buildPath = path.join(__dirname, 'client/build');
+app.use(express.static(buildPath));
+
+// React catch-all handler for client-side routing
+app.get('/', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
+});
+
 // Routes
 app.use('/api/auth', authRoutes);    // 🔐 Login/Register
 app.use('/api/users', userRoutes);   // 👤 User management
